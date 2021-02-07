@@ -19,7 +19,7 @@ There are a couple of hardware components you'll need to get this working:
   2. A basic computer running Linux: I'm using a Raspberry Pi 4 that I got in a kit from [Vilros](https://vilros.com/collections/raspberry-pi-kits) for about $120.
   3. Optionally a network-connected home weather station: I have a [Netatmo system](https://shop.netatmo.com/en-us/weather/smart-weather-station/weatherstation) that's about $180.
   
-From there, it's mostly software installation and setup.
+From there, it's mostly software installation and setup. It might look like a lot of setup here, but I got to `Hello World` on my Joan within 2-3 hours and then spent a _ton_ of time getting the UI just right.
 
 ## Getting started
 
