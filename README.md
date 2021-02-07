@@ -38,7 +38,8 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 # execute installation script
 sudo sh get-docker.sh
 
-# add the `pi` user to the `docker` posix group to be able to run containers without privilege escalation
+# add the `pi` user to the `docker` posix group
+# to run containers without privilege escalation
 sudo usermod -aG docker pi
 
 # check version to see if you're all installed
@@ -168,24 +169,24 @@ Since we need to connect to the Home Assistant API (running locally on port 8123
 
 ## Building the UI
 
-VSS runs a somewhat limited or at least idiosyncratic headless version of WebKit to render web pages into the images that are displayed on Joan devices. All I know is that some things worked and some things didn't, so I had to find workarounds when the page would load correctly in a full version of Chrome but not render in VSS.
+VSS seems to run a somewhat limited or at least idiosyncratic headless version of WebKit to render web pages into the images that are displayed on Joan devices. All I know is that some things worked and some things didn't, so I had to find workarounds when the page would load correctly in a full version of Chrome but not render in VSS.
 
 Two key components there:
 1. An HTTP client since I can't stand dealing with the XHR API directly (I used [axios](https://www.npmjs.com/package/axios) but jQuery or anything else that can make an AJAX request will work)
 2. A framework for DOM binding (I used [Knockout](https://knockoutjs.com/) because it's so easy to integrate for a single read-only view like this one, but VueJS or React or anything else could do the job)
 
 I also used a couple of tools to aid in data presentation and styling:
-- [Moment Timezone](https://momentjs.com/timezone/) for managing timezone conversion and datetime formatting
 - Erik Flowers' gorgeous [Weather Icons](https://erikflowers.github.io/weather-icons/) font
+- [Moment Timezone](https://momentjs.com/timezone/) for managing timezone conversion and datetime formatting
 - Some open-source Google webfonts parsed for local installation with [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts/)
 
 I installed all the client-side libraries locally instead of using something like CDNJS. The above-ground cable lines near me are damaged frequently enough by falling braanches/trees that I wanted everything to work locally, even if it's with stale data.
 
-I haven't included my actual UI here, but I've sketched out the key logic in [index.html](index.html).
+I haven't included my actual UI here, but I've sketched out the key logic in [ui.html](ui.html).
 
 For a lot of weather metrics, Home Assistant's API pre-maps relevant [Material Design Icons]() but I preferred the look of Weather Icons, which also includes a handy [mapping reference](https://erikflowers.github.io/weather-icons/api-list.html) for a couple popular weather APIs.
 
-I got a lot of inspiration for my UI design from Dark Sky and AccuWeather :-)
+I got a lot of inspiration for my UI design from [Dark Sky](https://darksky.net/), [AccuWeather](https://www.accuweather.com/), and the [Netatmo Weather App](https://apps.apple.com/us/app/netatmo-weather/id532538499#?platform=ipad) 😊
 
 Worth noting that the [Joan 6" display](https://support.getjoan.com/hc/en-us/articles/360006718799-Joan-6-Technical-specifications) is 1024x758 and displays 16 levels of gray, so use your font weights and tones judiciously!
 
@@ -196,5 +197,5 @@ Once you've got the UI looking good and working well in a plain old browser, con
 
 ## Questions?
 
-If you have questions, submit them via the repo's [issue tracker](https://github.com/schwartzie/weather-joan/issues) and I'll do my best to answer!
+If you have questions, submit them via the repo's [issue tracker](https://github.com/schwartzie/weather-joan/issues) and I'll do my best to answer ☀️
 
