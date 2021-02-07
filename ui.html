@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<script type="text/javascript" src="assets/js/axios-0.21.1.min.js"></script>
+		<script type="text/javascript" src="assets/js/knockout-3.5.1.js"></script>
+	</head>
+	<body>
+
+	<!-- Template with data bindings specified as needed -->
+	<div><strong>Some Value</strong> <span data-bind="text: sensor_some_entity_id.state"></span></div>
+
+	<script type="text/javascript">
+		
+	
+	// API details for retrieving sensor and forecast data from Home Assistant
+	const haConfig = {
+	  url: '/api/states',
+	  headers: {
+	    'Authorization': 'Bearer <LONG LASTING ACCESS TOKEN FROM HOME ASSISTANT>',
+		'Content-Type': 'application/json;'
+	  }
+	};
+	
+	// define container for knockout data bindings
+	let viewModel = {};
+	
+	axios.get(haConfig.url, haConfig)
+	  .then(response => {
+		  // the `/api/services` endpoint returns an array of objects
+		  // it's going to be much easier to reference them by Home Assistant entity ID
+		  // but Home Assistant uses dots for namespacing which will make JS property access
+		  // just a little more cumbersome, so replacing the dots with underscores
+		  response.data.forEach(item => {
+		   	viewModel[item.entity_id.replaceAll('.', '_')] = item;
+		  });
+		  
+		  // apply bindings!
+		  ko.applyBindings(viewModel)
+	  });
+		
+		
+	</script>
+
+</body>
+</html>
